@@ -1,8 +1,13 @@
 {
   "name": "physics",
   "version": "1.0.0",
-  "description": "",
+  "description": "http://123physics.ru",
   "main": "index.js",
+  "engines": {
+    "node": "^6.2.0",
+    "npm": "^3.8.9"
+  },
+  "repository": "https://github.com/NikeSM/Physics",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
