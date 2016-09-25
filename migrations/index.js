@@ -1,6 +1,6 @@
 'use strict';
 
-let dbConnections = require('./db-connection');
+let dbConnections = require('./../db-connection');
 let settings = require('../settings');
 let books = require('./books');
 let images = require('./images');
