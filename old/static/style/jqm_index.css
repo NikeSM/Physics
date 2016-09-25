@@ -1,0 +1,241 @@
+@media (max-width:45.9375em) {
+    .ui-panel-content-wrap-position-left.ui-panel-content-wrap-open .jqm-header .jqm-navmenu-link .ui-icon {
+        background-position: -51px 50%;
+    }
+}
+.ui-panel-animate.ui-panel-content-wrap:not(.ui-panel-content-wrap-closed) .jqm-search > .jqm-list {
+    display: none;
+}
+
+.ui-panel-display-reveal {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open,
+.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open {
+    -webkit-box-shadow: -5px 0 5px rgba(0,0,0,.10);
+    -moz-box-shadow: -5px 0 5px rgba(0,0,0,.10);
+    box-shadow: -5px 0 5px rgba(0,0,0,.10);
+}
+
+.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open.jqm-header::after,
+.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open .jqm-header::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background-image: url(jqm_demo-icons-sd.png);
+    background-position: -33px 50%;
+    -webkit-background-size: 85px 20px;
+    -moz-background-size: 85px 20px;
+    -o-background-size: 85px 20px;
+    background-size: 85px 20px;
+}
+
+.ui-panel-animate.ui-panel-content-wrap > .ui-header.jqm-header {
+    position: relative;
+}
+
+@media only screen and (min-width:46em) and (-webkit-min-device-pixel-ratio: 1.3),
+only screen and (min-width:46em) and (min--moz-device-pixel-ratio: 1.3),
+only screen and (min-width:46em) and (min-resolution: 200dpi) {
+    /* global nav panel close button */
+    .ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open.jqm-header::after,
+    .ui-panel-content-wrap-position-left.ui-panel-content-wrap-open .jqm-header::after {
+        background-image: url(jqm_demo-icons-hd.png);
+    }
+}
+
+#main_page #toc_panel.ui-panel {
+    width: 30em;
+}
+
+
+#main_page #toc_panel.ui-panel-closed {
+    width: 0;
+}
+
+#main_page .ui-panel-position-left.ui-panel-display-reveal {
+    left: 0;
+}
+
+#main_page .ui-panel-content-wrap-position-left.ui-panel-content-wrap-open,.ui-panel-dismiss-position-left.ui-panel-dismiss-open
+{
+    left: 30em;
+    right: -30em;
+}
+
+#main_page .ui-panel-animate.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal
+{
+    left: 0;
+    right: 0;
+    -webkit-transform: translate3d(30em, 0, 0);
+    -moz-transform: translate3d(30em, 0, 0);
+    transform: translate3d(30em, 0, 0);
+}
+
+/* Combined listview collapsible menu. */
+/* Unset negative margin bottom on the listviews. */
+#toc_panel .ui-panel-inner>.ui-listview {
+    margin-bottom: 0;
+}
+/* Unset top and bottom margin on collapsible set. */
+#toc_panel .ui-collapsible-set {
+    margin: 0;
+}
+/* The first collapsible contains the collapsible set. Make it fit exactly in the collapsible content. */
+#toc_panel .ui-panel-inner>.ui-collapsible>.ui-collapsible-content {
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+/* Remove border top if a collapsible comes after a listview. */
+#toc_panel .ui-panel-inner>.ui-collapsible>.ui-collapsible-heading .ui-btn,#toc_panel .ui-collapsible.ui-first-child .ui-collapsible-heading .ui-btn
+{
+    border-top: none;
+}
+/* Give the first collapsible heading the same padding, i.e. same height, as the list items. */
+#toc_panel .ui-collapsible-heading .ui-btn-inner {
+    padding: .7em 40px .7em 15px;
+}
+/* Give the other collapsible headings the same padding and font-size as the list divider. */
+#toc_panel .ui-collapsible-set .ui-collapsible-heading .ui-btn-inner {
+    padding: .5em 40px .5em 15px;
+    font-size: 14px;
+}
+
+
+/* Reveal menu shadow on top of the list items */
+#main_page .ui-panel-display-reveal {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+#main_page .ui-panel-content-wrap-position-left {
+    -webkit-box-shadow: -5px 0px 5px rgba(0, 0, 0, .15);
+    -moz-box-shadow: -5px 0px 5px rgba(0, 0, 0, .15);
+    box-shadow: -5px 0px 5px rgba(0, 0, 0, .15);
+}
+
+/* Use the ui-body class of your page theme (ui-body-d in this demo) to set a background image.
+This class will be added to the content wrapper, while the page itself gets the same background
+as the panel before opening the panel. */
+#main_page .ui-body-d {
+    background-repeat: repeat-x;
+    background-position: left bottom;
+}
+
+/* Styling of the page contents */
+.article p {
+    margin: 0 0 1em;
+    line-height: 1.5;
+}
+
+.article p img {
+    max-width: 100%;
+}
+
+.article p:first-child {
+    text-align: center;
+}
+
+.article small {
+    display: block;
+    font-size: 75%;
+    color: #c0c0c0;
+}
+
+.article p:last-child {
+    text-align: right;
+}
+
+.article a.ui-btn {
+    margin-right: 2em;
+    -webkit-border-radius: .4em;
+    border-radius: .4em;
+}
+
+@media all and (min-width:769px) {
+    .article {
+        max-width: 994px;
+        margin: 0 auto;
+        padding-top: 4em;
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+        -webkit-column-gap: 2em;
+        -moz-column-gap: 2em;
+        column-gap: 2em;
+    }
+
+}
+
+@media all and (max-width:769px) {
+    iframe {
+        width: 100vw;
+    }
+    #content {
+        margin: 1px;
+        padding: 3px;
+    }
+    #main_page #toc_panel.ui-panel {
+        width: 100vw;
+    }
+
+
+    #main_page #toc_panel.ui-panel-closed {
+        width: 0;
+    }
+
+    #main_page .ui-panel-position-left.ui-panel-display-reveal {
+        left: 0;
+    }
+
+    #main_page .ui-panel-content-wrap-position-left.ui-panel-content-wrap-open,.ui-panel-dismiss-position-left.ui-panel-dismiss-open
+    {
+        left: 100vw;
+        right: -100vw;
+    }
+
+    #main_page .ui-panel-animate.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal
+    {
+        left: 0;
+        right: 0;
+        -webkit-transform: translate3d(100vw, 0, 0);
+        -moz-transform: translate3d(100vw, 0, 0);
+        transform: translate3d(100vw, 0, 0);
+    }
+    #main_page #ref_panel.ui-panel {
+        width: 100vw;
+    }
+
+
+    #main_page #ref_panel.ui-panel-closed {
+        width: 0;
+    }
+
+    #main_page .ui-panel-position-right.ui-panel-display-reveal {
+        right: 0;
+    }
+
+    #main_page .ui-panel-content-wrap-position-right.ui-panel-content-wrap-open,.ui-panel-dismiss-position-right.ui-panel-dismiss-open
+    {
+        left: 100vw;
+        right: -100vw;
+    }
+
+    #main_page .ui-panel-animate.ui-panel-content-wrap-position-right.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal
+    {
+        left: 0;
+        right: 0;
+        -webkit-transform: translate3d(100vw, 0, 0);
+        -moz-transform: translate3d(100vw, 0, 0);
+        transform: translate3d(100vw, 0, 0);
+    }
+}

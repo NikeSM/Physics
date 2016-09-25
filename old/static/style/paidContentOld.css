@@ -1,0 +1,89 @@
+dfn.lyxnoun {
+    font-variant: small-caps;
+}
+div.standard {
+    margin-bottom: 2ex;
+}
+ul.itemize {
+    margin-top: 0.7ex;
+    margin-bottom: 0.7ex;
+    margin-left: 3ex;
+    text-align: left;
+
+}
+div.plain_layout {
+    text-align: left;
+
+}
+ol.enumerate {
+    margin-top: 0.7ex;
+    margin-bottom: 0.7ex;
+    margin-left: 3ex;
+    text-align: left;
+
+}
+div.wrap {
+    float: right;
+    border: 2px solid black;
+    padding: 1ex;
+    margin: 1ex;
+}
+div.Boxed {
+    border: solid thick black;
+    padding: 0.5ex;
+}
+
+#content {
+    max-width: 1100px;
+    margin: 100px auto;
+}
+
+textarea {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    display: block;
+}
+button {
+    margin: 10px;
+}
+body {
+    background-image: url("paper.jpeg");
+    font-family: Helvetica,Arial,sans-serif;
+}
+
+#payPage {
+    margin-top: -100px;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 1;
+    display: none;
+
+}
+
+#payPageContent {
+    max-width: 1100px;
+    height: 400px;
+    overflow-y: auto;
+    margin: 100px auto;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#fff));
+    border: solid 1px black;
+    padding: 50px;
+    position: relative;
+}
+
+#closeButton {
+    /*background-image: url("cross.png");*/
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    /*border-left: solid 1px black;*/
+    /*border-bottom: solid 1px black;*/
+}
+
+#closeButton:hover {
+    background-color: #eeeeee;
+}

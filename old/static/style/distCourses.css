@@ -1,0 +1,52 @@
+dfn.lyxnoun {
+    font-variant: small-caps;
+}
+div.standard {
+    margin-bottom: 2ex;
+}
+ul.itemize {
+    margin-top: 0.7ex;
+    margin-bottom: 0.7ex;
+    margin-left: 3ex;
+    text-align: left;
+
+}
+div.plain_layout {
+    text-align: left;
+
+}
+ol.enumerate {
+    margin-top: 0.7ex;
+    margin-bottom: 0.7ex;
+    margin-left: 3ex;
+    text-align: left;
+
+}
+div.wrap {
+    float: right;
+    border: 2px solid black;
+    padding: 1ex;
+    margin: 1ex;
+}
+div.Boxed {
+    border: solid thick black;
+    padding: 0.5ex;
+}
+
+
+textarea {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    display: block;
+}
+button {
+    margin: 10px;
+}
+body {
+    background-image: url("paper.jpeg");
+    font-family: Helvetica,Arial,sans-serif;
+    margin: 100px;
+}
+
+

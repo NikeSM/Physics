@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Физикапросто.рф</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="fragment" content="!">
+    <meta name='yandex-verification' content='6c644b9091c7d6fd' />
+    <meta name="google-site-verification" content="p47uwWR90AGrG5lzcoWpCT9eXsTBzaK-TjB0ecGVStM" />
+
+    {% block head %}
+    {% endblock %}
+</head>
+<body >
+{% block body %}
+{% endblock %}
+</body>
+<script type="text/javascript" src="./static/libs/jquery.js"></script>
+<script type="text/javascript" src="./static/libs/jquery.mobile.min.js"></script>
+<script type = text/javascript>
+    var $SCRIPT_ROOT = {{ request.script_root | tojson | safe }};
+    var editor = "edit";
+    //        var editor = "update";
+</script>
+<script type="text/javascript" src="./static/scripts/init.js"></script>
+<script type="text/javascript" src="./static/scripts/create_toc.js"></script>
+<script type="text/javascript" src="./static/scripts/index.js"></script>
+<script type="text/javascript" src="./static/scripts/model.js"></script>
+<script type="text/javascript" src="./static/scripts/paragraph.js"></script>
+<script type="text/javascript" src="./static/scripts/search.js"></script>
+<script type="text/javascript" src="./static/scripts/problem.js"></script>
+<script type="text/javascript" src="./static/scripts/hint.js"></script>
+<script type="text/javascript" src="./static/scripts/image_demo.js"></script>
+<!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script type="text/javascript" src="./static/libs/yandex.js"></script>
+
+</html>

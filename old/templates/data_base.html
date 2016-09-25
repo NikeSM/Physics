@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="static/libs/jquery.js"></script>
+    <script type = text/javascript>
+        var $SCRIPT_ROOT = {{ request.script_root | tojson | safe }};
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    <script type = "text/javascript" src = "static/scripts/data_base.js"> </script>
+
+</head>
+
+<body >
+  <table border = "1"  id = 'book'>
+		<caption>Книги</caption>
+			<tr>
+				<th>ID</th><th>Номер</th><th>Название</th>
+			</tr>
+  </table>
+  <table border = "1"  id = 'chapter'>
+		<caption>Главы</caption>
+			<tr>
+				<th>id</th><th>Номер</th><th>Название</th><th>ID книги</th>
+			</tr>
+  </table>
+
+  <table border = "1"  id = 'problem'>
+		<caption>Задачи</caption>
+			<tr>
+				<th>ID</th><th>Номер</th><th>Название</th><th>ID параграфа</th><th>Задачи по теме</th><th>ключевые слова</th>
+			</tr>
+  </table>
+
+  <table border = "1"  id = 'prompt'>
+		<caption>Подсказки</caption>
+			<tr>
+				<th>ID</th><th>Номер</th><th>Название</th><th>ID параграфа</th>
+			</tr>
+  </table>
+
+
+
+  <table border = "1"  id = 'paragraph'>
+		<caption>Параграфы</caption>
+			<tr>
+				<th>ID</th><th>Номер</th><th>Название</th><th>ID главы</th><th>Задачи по теме</th><th>Ключевые слова</th>
+			</tr>
+  </table>
+
+  <table border = "1"  id = 'image'>
+      <caption>Изображения</caption>
+      <tr>
+          <th>ID</th><th>Название</th>
+      </tr>
+  </table>
+
+  <table border = "1"  id = 'search'>
+      <caption>Запросы</caption>
+      <tr>
+          <th>ID</th><th>Запрос</th><th>Время</th>
+      </tr>
+  </table>
+
+  <table border = "1"  id = 'feedback'>
+      <caption>Обратная связь</caption>
+      <tr>
+          <th>ID</th><th>Ответ</th><th>Время</th>
+      </tr>
+  </table>
+  </body>
+</html>
+
+

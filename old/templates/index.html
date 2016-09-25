@@ -1,0 +1,304 @@
+{% extends "layout.html" %}
+{% block head %}
+<link rel="stylesheet" href="./static/style/jquery.mobile.min.css">
+<link rel="stylesheet" href="./static/style/index.css">
+<link rel="stylesheet" href="./static/style/jqm_index.css">
+<link rel="stylesheet" href="./static/style/hint.css">
+{% endblock %}
+{% block body %}
+<div id="image_demo" style="display: none;width:100vw;height:100vh;text-align:center;vertical-align:middle"></div>
+<div id="loading" style="display: none;width:100vw;height:100vh;">
+    <img id="loading_gif" src="./static/style/images/ajax-loader.gif">
+</div>
+<div data-role="page" id="main_page" class="main_page" data-theme="d" data-rel="back" data-history="false">
+    <div data-role="header" data-theme="c" class="header" id="header">
+
+        <div class="ui-grid-b">
+            <div class="ui-block-a">
+                <div data-role="controlgroup" data-type="horizontal" id="header_controlgroup">
+                    <a href="#toc_panel" id="button_t" data-role="button" class="icon-t hint button_t" data-icon="t"
+                       data-iconpos="notext" data-title="Теория"
+                       data-shadow="false" data-iconshadow="false"></a>
+                    <a href="#toc_panel" id="button_p" data-role="button" class="icon_p hint button_p" data-icon="p"
+                       data-iconpos="notext" data-title="Примеры решения задач"
+                       data-shadow="false" data-iconshadow="false"></a>
+                    <a href="#toc_panel" id="button_s" data-role="button" class="icon_s ui-disabled button_s"
+                       data-icon="s"
+                       data-iconpos="notext"
+                       data-shadow="false" data-iconshadow="false"></a>
+                    <a href="#toc_panel" id="button_k" data-role="button" class="icon_k ui-disabled button_k"
+                       data-icon="k"
+                       data-iconpos="notext"
+                       data-shadow="false" data-iconshadow="false"></a>
+                    <a href="javascript:showHelp()" data-role="button" data-iconpos="notext" data-icon="info"
+                       data-title="Помощь" class="hint"
+                            ></a>
+                    <a href="javascript:showHome()" data-role="button" data-iconpos="notext"
+                       data-title="Главная страница" class="hint"
+                       data-icon="home"></a>
+                </div>
+            </div>
+            <div class="ui-block-b">
+                <div class="ui-select pos_wrap" style="display: none" id="pos_wrap">
+                    <select data-mini="true" data-native-menu="false" tabindex="-1" data-inline="true" id="pos"
+                            class="pos">
+
+                    </select>
+                </div>
+            </div>
+            <div class="ui-block-c">
+                <div data-role="fieldcontain">
+                    <input type="search" id="search" maxlength="40" class="search"/>
+
+                </div>
+            </div>
+        </div>
+        <!-- /grid-b -->
+
+
+        <h1 id="current_topic" class="current_topic" style="text-transform: uppercase; line-height: 1.6; font-size: 1.5em"></h1>
+
+        <div class="ui-grid-b my-breakpoint">
+            <div class="ui-block-a">
+                <div data-role="controlgroup" data-type="horizontal">
+                    <a href="javascript:buttonPrevious()" data-role="button" data-icon="arrow-u" data-iconpos="notext"
+                       id="button_previous" data-title="Предыдущий параграф"
+                       class="hint button_previous"
+                       data-shadow="false" data-iconshadow="false"></a>
+                    <a href="javascript:buttonNext()" data-role="button" data-icon="arrow-d" data-iconpos="notext"
+                       id="button_next" data-title="следующий параграф" class="hint button_next"
+                       data-shadow="false" data-iconshadow="false"></a>
+                </div>
+            </div>
+            <div class="ui-block-b">
+
+                <div id="header_problems_buttons" class="header_problems_buttons">
+                    <div style="display:inline-block" data-type="horizontal" data-role="controlgroup">
+                        <a href="javascript:buttonPreviousProblem()" style="display:inline-block" data-role="button"
+                           data-icon="arrow-l" data-iconpos="notext" id="button_previous_problem" data-shadow="false"
+                           data-iconshadow="false" data-title="Предыдущая задача"
+                           class="hint button_previous_problem"></a>
+                        <a data-role="button" style="display: none" data-icon="arrow-l" data-iconpos="notext"
+                           data-shadow="false" data-iconshadow="false"></a>
+                    </div>
+                    <input type="text" id="problem_number" class="problem_number" maxlength="7"/>
+
+                    <div style="display:inline-block" data-type="horizontal" data-role="controlgroup">
+                        <a data-role="button" style="display: none" data-icon="arrow-l" data-iconpos="notext"
+                           data-shadow="false" data-iconshadow="false"></a>
+                        <a href="javascript:buttonNextProblem()" style="display:inline-block" data-role="button"
+                           data-icon="arrow-r" data-iconpos="notext" id="button_next_problem"
+                           data-shadow="false" data-iconshadow="false" data-title="Следующая задача"
+                           class="hint button_next_problem"></a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="ui-block-c">
+            </div>
+        </div>
+
+    </div>
+
+    <div data-role="header" data-theme="c" class="header" id="mobile_header">
+
+        <div data-role="fieldcontain">
+            <input type="search" id="mobile_search" maxlength="40" class="search"/>
+
+        </div>
+        <div class="ui-grid-a my-breakpoint-mobile" style="margin-left: 4px">
+            <div class="ui-block-a">
+                <div data-role="controlgroup" data-type="horizontal" id="mobile_header_controlgroup"
+                     style="display: inline-block;">
+                    <a href="#toc_panel" id="mobile_button_t" data-role="button" class="icon-t button_t"
+                       data-icon="t"
+                       data-iconpos="notext"
+                       data-shadow="false" data-iconshadow="false"></a>
+                    <a href="#toc_panel" id="mobile_button_p" data-role="button" class="icon_p button_p"
+                       data-icon="p"
+                       data-iconpos="notext"
+                       data-shadow="false" data-iconshadow="false"></a>
+                </div>
+                <div data-role="controlgroup" data-type="horizontal" style="display: inline-block;">
+
+                    <!--<a href="#toc_panel" id="mobile_button_s" data-role="button" class="icon_s ui-disabled button_s"-->
+                    <!--data-icon="s"-->
+                    <!--data-iconpos="notext"-->
+                    <!--data-shadow="false" data-iconshadow="false"></a>-->
+                    <!--<a href="#toc_panel" id="mobile_button_k" data-role="button" class="icon_k ui-disabled button_k"-->
+                    <!--data-icon="k"-->
+                    <!--data-iconpos="notext"-->
+                    <!--data-shadow="false" data-iconshadow="false"></a>-->
+                    <a href="javascript:showHelp()" data-role="button" data-iconpos="notext" data-icon="info"
+                            ></a>
+                    <a href="javascript:showHome()" data-role="button" data-iconpos="notext"
+                       data-icon="home"></a>
+                </div>
+            </div>
+            <div class="ui-block-b">
+                <div data-role="controlgroup" data-type="horizontal" style="display: inline-block;">
+                    <a data-role="button" data-iconpos="notext" data-icon="info" style="display: none"></a>
+                    <a data-role="button" data-iconpos="notext"
+                       data-icon="search" id="search_hide"
+                       style="border-bottom-left-radius: inherit;border-top-left-radius: inherit;"></a>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="mobile_current_topic" style="text-transform:uppercase;
+             text-align: center; margin-left: 4px"></div>
+        <div class="ui-grid-a my-breakpoint-mobile" style="margin-left: 4px">
+            <div class="ui-block-a">
+                <div id="mobile_header_problems_buttons" class="header_problems_buttons" style="display:inline-block">
+                    <div style="display:inline-block" data-type="horizontal" data-role="controlgroup">
+                        <a href="javascript:buttonPreviousProblem()" style="display:inline-block" data-role="button"
+                           data-icon="arrow-l" data-iconpos="notext" id="mobile_button_previous_problem"
+                           data-shadow="false"
+                           data-iconshadow="false"
+                           class="button_previous_problem"></a>
+                        <a data-role="button" style="display: none" data-icon="arrow-l" data-iconpos="notext"
+                           data-shadow="false" data-iconshadow="false"></a>
+                    </div>
+
+                    <span id="mobile_problem_number"></span>
+
+                    <div style="display:inline-block" data-type="horizontal" data-role="controlgroup">
+                        <a data-role="button" style="display: none" data-icon="arrow-l" data-iconpos="notext"
+                           data-shadow="false" data-iconshadow="false"></a>
+                        <a href="javascript:buttonNextProblem()" style="display:inline-block" data-role="button"
+                           data-icon="arrow-r" data-iconpos="notext" id="mobile_button_next_problem"
+                           data-shadow="false" data-iconshadow="false"
+                           class=" button_next_problem"></a>
+                    </div>
+                </div>
+                <div data-role="controlgroup" data-type="horizontal" style="display:inline-block">
+                    <a href="javascript:buttonPrevious()" data-role="button" data-icon="arrow-u" data-iconpos="notext"
+                       id="mobile_button_previous"  class=" button_previous"
+                       data-shadow="false" data-iconshadow="false"></a>
+                    <a href="javascript:buttonNext()" data-role="button" data-icon="arrow-d" data-iconpos="notext"
+                       id="mobile_button_next" class=" button_next"
+                       data-shadow="false" data-iconshadow="false"></a>
+                </div>
+
+                <div class="ui-select pos_wrap" style="display:inline-block;" id="mobile_pos_wrap">
+                    <select data-mini="true" data-native-menu="false" tabindex="-1" data-inline="true" id="mobile_pos"
+                            class="pos">
+
+                    </select>
+                </div>
+            </div>
+            <div class="ui-block-b">
+                <div data-role="controlgroup" data-type="horizontal" style="display: inline-block;">
+                    <a data-role="button" data-iconpos="notext" data-icon="bars" style="display: none"></a>
+                    <a data-role="button" data-iconpos="notext"
+                       id="mobile_header_hide"
+                       class="icon_hide" data-icon="hide"
+                       style="border-bottom-left-radius: inherit;border-top-left-radius: inherit;"></a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- /header -->
+
+    <div data-role="content" id="content">
+
+
+        <div id="toc_open_button" class="toc_control_buttons" data-role="controlgroup" data-type="horizontal">
+            <a data-role="button" style="display: none" data-icon="arrow-r" data-iconpos="notext" data-shadow="false"
+               data-iconshadow="false"></a>
+            <a href="#toc_panel" style="display:inline-block;height:100px;width:25px" data-role="button"
+               data-icon="arrow-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false"
+               data-title="Открыть оглавление" class="hint"></a>
+        </div>
+
+        <div id="article" class="article">
+
+        </div>
+        <div>
+            <div>
+                <a href="https://metrika.yandex.ru/stat/?id=31160276&amp;from=informer"
+                   target="_blank" rel="nofollow">
+                    <img src="https://mc.yandex.ru/informer/31160276/3_1_FFFFFFFF_EFEFEFFF_0_pageviews"
+                         style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика"
+                         title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)"
+                         onclick="javascript:onYandexClick()"/>
+                </a>
+                <noscript>
+                    <div>
+                        <img src="https://mc.yandex.ru/watch/31160276" style="position:absolute; left:-9999px;" alt=""/>
+                    </div>
+                </noscript>
+            </div>
+        </div>
+        <!-- /article -->
+    </div>
+    <div data-role="content" style="display: none;overflow-y: scroll" id="article_search">
+        <ul id="search_results" data-inset="true" data-role="listview">
+            <li data-role="list-divider" id="search_best">Хорошие результаты</li>
+            <li data-role="list-divider" id="search_good">Близкие результаты</li>
+        </ul>
+    </div>
+
+    <!-- /content -->
+
+    <div data-role="panel" id="toc_panel" data-theme="c">
+        <H1 id="panel_header">Теория</H1>
+
+        <div style="text-align: right;" id="mobile_toc_close_button">
+            <a href="#toc_panel" data-role="button" data-icon="delete" data-iconpos="notext" data-rel="close"
+               data-shadow="false" data-iconshadow="false" data-title="Закрыть оглавление" class="hint ui-btn-right"
+               style="margin-right: 25px"></a>
+        </div>
+        <div style="margin: 5px">
+            <div id="toc_close_button" class="toc_control_buttons" data-role="controlgroup" data-type="horizontal">
+                <a href="#toc_panel" style="display:inline-block;height:100px;width:25px" data-role="button"
+                   data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false"
+                   data-title="Закрыть оглавление" class="hint"></a>
+                <a data-role="button" style="display: none" data-icon="arrow-r" data-iconpos="notext"
+                   data-shadow="false" data-iconshadow="false"></a>
+            </div>
+
+            <br>
+
+            <div style="height:80vh;overflow-y:scroll" id="toc_scroll">
+                <div id="toc_theory" data-role="listview">
+                </div>
+                <div id="toc_problems" data-role="listview" style="display:none">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /panel -->
+
+    <div data-role="panel" id="ref_panel" data-display="overlay" data-position="right" data-theme="c">
+        <div data-role="controlgroup" data-type="horizontal">
+            <a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-rel="close"
+               data-shadow="false" data-iconshadow="false" data-title="Закрыть" class="hint"></a>
+            <a href="javascript:show_in_article()" data-role="button" data-iconpos="notext" data-icon="grid"
+               id="show_in_article"
+               data-title="Развернуть на весь экран" class="hint"></a>
+            <a href="javascript: ref_previous()" data-role="button" data-icon="arrow-l" class="ui-disabled hint"
+               id="ref_previous"
+               data-iconpos="notext" data-title="Назад"></a>
+        </div>
+        <div>
+            <h3 id="ref_title">
+            </h3>
+        </div>
+
+
+        <div data-role="content" id="ref_content" style="overflow-y:scroll; height:80vh">
+
+
+        </div>
+    </div>
+    <!-- /panel -->
+
+</div>
+<!-- /page -->
+
+
+{% endblock %}

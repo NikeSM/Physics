@@ -1,0 +1,94 @@
+{% extends "layout_editor.html" %}
+{% block head %}
+<script type = "text/javascript" src = "static/scripts/editor.js"> </script>
+<style>
+    .ui-dialog-contain{
+        min-width: 80%;
+    }
+</style>
+{% endblock %}
+{% block body %}
+
+<div class = "ui-select"> 
+  <select name = "selectMain" data-inline = "true" id = "selectMain" data-native-menu = "false" tabindex = "-1"> 
+    <option value = "2"> Параграф </option> 
+    <option value = "1"> Глава </option> 
+    <option value = "0"> Книга </option> 
+    <option value = "3"> Задача </option> 
+    <option value = "4"> Подсказака </option> 
+  </select> 
+</div> 
+    
+<fieldset data-role = "controlgroup" data-type = "horizontal" > 
+  <input type = "radio" name = "buttonAdd" id = "buttonAdd" value = "on" checked = "checked"> 
+  <label for = "buttonAdd"> Добавить </label> 
+  <input type = "radio" name = "buttonAdd" id = "buttonEdit" value = "off"> 
+  <label for = "buttonEdit"> Редактировать </label>
+</fieldset> 
+
+<div class = "ui-select"> 
+  <select name = "selectData" data-inline = "true" id = "selectData" data-native-menu = "false" tabindex = "-1"> 
+
+  </select> 
+</div> 
+
+<fieldset data-role = "controlgroup" data-type = "horizontal" id = "buttonHor"> 
+  <input type = "radio" name = "add2" id = "c0" value = "on" checked = "checked"> 
+  <label for = "c0"> Содержание </label> 
+  <input type = "radio" name = "add2" id = "c1" value = "off"> 
+  <label for = "c1"> Описание </label> 
+  <input type = "radio" name = "add2" id = "c2" value = "off"> 
+  <label for = "c2"> Ключевые слова </label> 
+  <input type = "radio" name = "add2" id = "c3" value = "off"> 
+  <label for = "c3"> Название </label> 
+  <input type = "radio" name = "add2" id = "c4" value = "off"> 
+  <label for = "c4"> Номер </label> 
+  <input type = "radio" name = "add2" id = "c5" value = "off"> 
+  <label for = "c5"> Задачи по теме </label> 
+</fieldset> 
+<div class="ui-grid-a">
+  <div class="ui-block-a">
+  <a href="#" id="clear" class="ui-input-clear ui-btn ui-shadow ui-btn-corner-all ui-fullsize ui-btn-icon-notext ui-btn-up-c" title="clear text" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-icon="delete" data-iconpos="notext" data-theme="c" data-mini="false"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">clear text</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a> 
+    <textarea id = "textMain" style="height:60vh;width:49vw;max-height:60vh;max-width:49vw;" wrap = "on" data-clear-btn = "true" name = "textMain"> 
+
+    </textarea> 
+
+  </div>
+  <div class="ui-block-b"> 
+    <div class="ui-select">
+      <select name="select-choice-5" data-native-menu="false" tabindex="-1" data-theme="c"  data-inline="true" id = "addLink" >
+        <option data-placeholder="true">Создать ссылку</option>
+        <option value = "2" id="l2"> Параграф </option>  
+        <option value = "3" id="l1"> Задача </option> 
+        <option value = "4" id="l2"> Подсказка </option> 
+        <option value = "0" id="l3"> Внешняя ссылка </option> 
+      </select>
+      <select name="select-choice-5" data-native-menu="false" tabindex="-1" data-theme="c"  data-inline="true" id = "selectLink" >
+      </select>
+    </div>
+      <div id = "outLink" style = "display:none">
+        <input type = "text" id = "textOutLink" >
+        <input type = "submit" data-role = "button" id = "addOutLink" value = "Создать" data-inline = "true"  data-theme = "c">
+      </div>
+      <h3> Добавить файл в текущее окно: </h3>  
+
+      <div>
+          <input id = "addFile" data-theme = "c" type = "file" name = "file">
+          <input type = "submit" data-role = "button" id = "reset" value = "Сбросить" data-inline = "true"  data-theme = "c">
+      </div>
+    <br>
+    <div id="del" style="display:none">
+      <input type = "submit" data-role = "button" id = "delete" value = "Удалить" data-inline = "true"  data-theme = "c" >
+    </div>
+  </div>
+</div>
+<br> 
+<div id = "img" style = "display:none"> 
+  <h3> Выбирите изображение: </h3> 
+  <form action = "/saveimg" method = "post" enctype = "multipart/form-data" data-ajax = "false" id = "sendImage"> 
+    <input  data-theme = "c" type = "file" multiple name = "file" > 
+    <input data-role = "button" data-inline = "true"  data-theme = "c" type = "submit" value = "Загрузить" > 
+  </form> 
+</div> 
+<a data-role = "button" data-inline = "true"  data-theme = "c" id = "sub">  <span> Отправить </span>  </a>          
+{% endblock %}
