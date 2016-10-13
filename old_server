@@ -20,68 +20,6 @@ base = r"base"
 
 app = Flask(__name__, static_folder = root + r'/static')
 
-def create_dic(arr, parent, arr_parent, pos):
-  dic = {"order": []}
-  for i in arr:
-    dic[i[0]] = {
-    	"id": i[0],
-      "name": i[1],
-      "number": i[2],
-      "children": [],
-      "pos": []
-      }
-    dic["order"].append(i[0])
-    if parent == True:
-      dic[i[0]]["parent"] = i[3]
-      arr_parent[i[3]]["children"].append(i[0])
-    if pos == True:
-    	  if i[4] != None and i[4] != "None" and  i[4] != "":
-    			k = i[4].replace(" ","").split(",")
-    			dic[i[0]]["pos"] = k
-  return dic, arr_parent
-
-def bubbleSort(param, a):
-  i = len(a)
-  while i > 1:
-     for j in xrange(i - 1):
-          if a[j][param] < a[j + 1][param]:
-              a[j], a[j+1] = a[j+1], a[j]
-     i -= 1
-  return a
-
-def collapse(param, a):
-  a = bubbleSort(0, a)
-
-  i = 0
-  while(i < len(a) - 1):
-    if(a[i][0] == a[i + 1][0]):
-      a.pop(i + 1)
-      a[i][param] = a[i][param] + 1
-    else:
-      i = i + 1
-  return a
-
-def secureKW(s):
-  s = s.strip().lower()
-  p = re.compile(u'[^a-z0-9а-я\- ]')
-  s = p.sub("$", s)
-  s = re.subn(r'\s+', ' ', s)[0]
-  s = s.split("$")
-  k = "$"
-  for i in reversed(range(len(s))):
-  	if s[i] != "":
-  		k = k + s[i].strip() + "$"
-  	else:
-  		s.pop(i)
-  return k
-
-def secureSearch(s):
-  s = s.strip().lower()
-  p = re.compile(u'[^a-z0-9а-я\- ]')
-  s = p.sub(" ", s)
-  s = re.subn(r'\s+', ' ', s)[0]
-  return s
-
 def isInGood(s):
   gw = [u"кпд", u"вес", u"мкт", u"газ", u"эдс"]
   for i in gw:
@@ -131,66 +69,17 @@ def merge(a, sql, height):
     a[len(a) - 1].append(height)
   return a
 
-@app.route('/showParagraph')
-def showParagraph():
-  global cursor
-
-  paragraph_id = request.args.get('paragraph')
-  if root == r"/home/virtwww/w_123physics-ru_7f500369/http/dev/dev":
-    sql = "SELECT paragraph_content, paragraph_date FROM paragraph WHERE paragraph_id = %s;" % paragraph_id
-  else:
-    sql = "SELECT paragraph_tmp, paragraph_date FROM paragraph WHERE paragraph_id = %s;" % paragraph_id
-  cursor.execute(sql)
-  paragraph = cursor.fetchone()
-  resp = make_response(jsonify(content = paragraph))
-  resp.headers['Last-Modified'] = paragraph[1].strftime('%a, %d %b %Y %H:%M:%S GMT')
-  return resp
-
-@app.route('/showSum')
-def showSum():
-  global cursor
-  number = request.args.get('number')
-  if root == r"/home/virtwww/w_123physics-ru_7f500369/http/dev/dev":
-    sql = "SELECT prompt_name, prompt_content, paragraph_id FROM prompt WHERE prompt_id = %s;" % number
-  else:
-    sql = "SELECT prompt_name, prompt_tmp, paragraph_id FROM prompt WHERE prompt_id = %s;" % number
-  cursor.execute(sql)
-  sum = cursor.fetchall()
-  return jsonify(result = sum)
-
-@app.route('/showProblem')
-def showProblem():
-  global cursor
-
-  problem_id = request.args.get('problem')
-  if root == r"/home/virtwww/w_123physics-ru_7f500369/http/dev/dev":
-    sql = "SELECT problem_content, problem_date FROM problem WHERE problem_id = %s;" % problem_id
-  else:
-    sql = "SELECT problem_tmp, problem_date FROM problem WHERE problem_id = %s;" % problem_id
-  cursor.execute(sql)
-  problem = cursor.fetchone()
-  resp = make_response(jsonify(content = problem))
-  resp.headers['Last-Modified'] = problem[1].strftime('%a, %d %b %Y %H:%M:%S GMT')
-  return resp
 
 @app.route('/search')
 def search():
-  global cursor
-  paragraph = []
-  problem = []
 
-  req = request.args.get('request')
-  req = secureSearch(req)
-  req_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-  sql = 'INSERT INTO  search (request, time) VALUES ("%s", "%s");'%(req, req_time)
-  cursor.execute(sql)
-  db.commit()
 
   sql = "SELECT paragraph_id FROM paragraph WHERE paragraph_keys  LIKE '%$"+req+"$%';"
   paragraph = merge(paragraph, sql, 10)
 
   sql = "SELECT problem_id FROM problem WHERE problem_keys  LIKE '%$"+req+"$%';"
   problem = merge(problem, sql, 10)
+
   req = goodWords(req)
   if(len(req) == 1):
     tmp = -1
@@ -212,16 +101,6 @@ def search():
     tmp.append("paragraph")
     problem.append(tmp)
   return jsonify(result = problem)
-
-@app.route('/feedback')
-def feedback():
-  global cursor
-
-  text = request.args.get('text')
-  sql = 'INSERT INTO feedback (feedback_text) VALUES ("%s");'%text
-  cursor.execute(sql)
-  db.commit()
-  return jsonify(result = text)
 
 @app.route('/saveimg', methods=['GET', 'POST'])
 def upload_file():
@@ -245,15 +124,6 @@ def upload_file():
       db.commit()
   return render_template(r'editor.html')
 
-
-
-@app.route('/getimg<name>')
-def getimg(name):
-  global cursor
-  sql = "SELECT image FROM image WHERE image_name = '%s'"  %name
-  cursor.execute(sql)
-  data = cursor.fetchone()[0]
-  return data
 
 @app.route('/' + editor)
 def edit():

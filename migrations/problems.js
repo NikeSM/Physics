@@ -32,7 +32,7 @@ module.exports = (physics, physics_old) => {
         if (pos && +pos) {
           physics('pos').insert({
             pos: pos,
-            type: 'pos',
+            type: 'problem',
             ref_id: row.problem_id
           }).then();
         }
